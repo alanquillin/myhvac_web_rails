@@ -1,0 +1,42 @@
+<%= form_for(@sensor) do |f| %>
+    <% if @sensor.errors.any? %>
+        <div class="alert alert-dismissable alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <h3><%=pluralize(@sensor.errors.count, 'error')%> were found trying to save the room data.</h3>
+          <ul>
+            <% @sensor.errors.full_messages.each do |error_mgs| %>
+                <li><%=error_mgs %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :manufacturer_id, 'Manufacturer Id' %><br/>
+      <%= f.text_field :manufacturer_id %>
+    </div>
+
+    <div class="field">
+      <%= f.label :active %><br/>
+      <%= f.check_box :active %>
+    </div>
+
+    <div class="field">
+      <%= f.label :room_id%><br/>
+      <%= f.collection_select :room_id, Room.order(:name),:id,:name, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :sensor_type_id%><br/>
+      <%= f.collection_select :sensor_type_id, SensorType.all,:id,:model_with_manufacturer, include_blank: true %>
+    </div>
+
+    <div class="action">
+      <%= f.submit %>
+    </div>
+<% end %>

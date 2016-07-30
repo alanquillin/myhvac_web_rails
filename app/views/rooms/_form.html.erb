@@ -1,0 +1,33 @@
+<%= form_for(@room) do |f| %>
+    <% if @room.errors.any? %>
+      <div class="alert alert-dismissable alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h3><%=pluralize(@room.errors.count, 'error')%> were found trying to save the room data.</h3>
+        <ul>
+          <% @room.errors.full_messages.each do |error_mgs| %>
+            <li><%=error_mgs %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :weight %><br/>
+      <%= f.text_field :weight %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label :active %><br/>
+      <%= f.check_box :active %>
+    </div>
+
+    <div class="action">
+      <%= f.submit %>
+    </div>
+<% end %>

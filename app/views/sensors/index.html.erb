@@ -1,0 +1,26 @@
+<h2>Sensors <%= link_to '[Add]', new_sensor_path %></h2>
+
+<% if @sensors.empty? %>
+  <i>None</i>
+<% else %>
+    <h3>Active Sensors</h3>
+    <% if @sensors.active.empty? %>
+        <i>None</i>
+    <% else %>
+      <ul>
+        <% @sensors.active.each do |sensor| %>
+         <li><%= link_to sensor.name, sensor %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <h3>Inactive Sensors</h3>
+    <% if @sensors.inactive.empty? %>
+        <i>None</i>
+    <% else %>
+      <ul>
+        <% @sensors.inactive.each do |sensor| %>
+            <li><%= link_to sensor.name, sensor %></li>
+        <% end %>
+      </ul>
+    <% end %>
+<% end %>

@@ -1,0 +1,6 @@
+<div>
+<%= link_to '<< Rooms list', rooms_path %>&nbsp;<%=link_to "<< #{@room.name}", @room %>
+</div>
+<h2>Edit Room: <%=@room.name %></h2>
+
+<%= render 'form' %>

@@ -1,0 +1,5 @@
+<%= link_to '<< Sensor list', sensors_path %>&nbsp;<%=link_to "<< #{@sensor.name}", @sensor %>
+
+<h2>Edit Sensor: <%= @sensor.name %></h2>
+
+<%= render 'form' %>

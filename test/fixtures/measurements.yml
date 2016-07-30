@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sensor_id: 1
+  measurement_type_id: 1
+  data: 1.5
+  recorded_date: 2016-08-09 09:44:08
+
+two:
+  sensor_id: 1
+  measurement_type_id: 1
+  data: 1.5
+  recorded_date: 2016-08-09 09:44:08

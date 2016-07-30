@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <%= render 'rooms', rooms: @dashboard.rooms.active %>
+
+      <%= render 'rooms', rooms: @dashboard.rooms.inactive, active: false %>
+    </div>
+    <div class="col-md-4">
+      Current temp: <%= @dashboard.current_temp.nil? ? 'unknown' : "#{@dashboard.current_temp} ° F" %>
+    </div>
+  </div>
+</div>

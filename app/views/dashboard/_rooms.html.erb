@@ -1,0 +1,26 @@
+<% require 'time'
+  active = local_assigns.fetch :active, true
+%>
+<div class="panel <%= active ? 'panel-primary' : 'panel-warning' %>">
+  <div class="panel-heading"><%=active ? 'Active' : 'Inactive' %> Rooms</div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Room</th>
+      <th>Temp</th>
+      <th>Rec Date</th>
+      <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% rooms.each do |room| %>
+        <tr>
+          <td><%= room.name %></td>
+          <td><%= room.current_temp.nil? ? raw('<i>N/A</i>') : "#{room.current_temp}° F" %></td>
+          <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.strftime('%x')}<br/>#{room.latest_temp_rec_date.strftime('%r')}") %></td>
+          <td>&nbsp;</td>
+        </tr>
+      <% end %>
+    </tbody>
+   </table>
+</div>

@@ -1,0 +1,18 @@
+<%= link_to '<< Rooms list', rooms_path %>
+
+<h2>Room: <%=@room.name %> <%= link_to '[Edit]', edit_room_path(@room) %></h2>
+<div>
+  <strong>Weight:</strong>&nbsp;<%=@room.weight %><br/>
+  <strong>Active:</strong>&nbsp;<%=@room.active ? 'Yes' : 'No' %>
+</div>
+
+<h3>Sensors:</h3>
+<% if @room.sensors.empty? %>
+<i>None</i>
+<% else %>
+<ul>
+  <% @room.sensors.each do |sensor| %>
+    <li><%=sensor.name %></li>
+  <% end %>
+</ul>
+<% end %>

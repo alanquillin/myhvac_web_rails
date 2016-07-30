@@ -1,0 +1,2 @@
+module RoomSensorsHelper
+end

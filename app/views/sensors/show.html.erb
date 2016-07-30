@@ -1,0 +1,19 @@
+<%= link_to '<< Sensors list', sensors_path %>
+
+<h2>Sensor: <%=@sensor.name %> <%= link_to '[Edit]', edit_sensor_path(@sensor) %></h2>
+<div>
+  <strong>Manufacturer Id:</strong> <%= @sensor.manufacturer_id %><br/>
+  <strong>Room:</strong> <%= @sensor.room.nil? ? raw('<i>None</i>') : @sensor.room.name %><br/>
+  <strong>Active:</strong> <%= @sensor.active ? 'Yes' : 'No' %>
+</div>
+<br/>
+<h3>Measurements:</h3>
+<% if @sensor.measurements.empty? %>
+  <i>None</i>
+<% else %>
+    <ul>
+      <% @sensor.measurements.each do |m| %>
+        <li><%="#{m.data} (#{m.measurement_type.name}) @ #{m.recorded_date}" %></li>
+      <% end %>
+    </ul>
+<% end %>

@@ -1,0 +1,11 @@
+<h2><%=@room.name %>'s Sensors</h2>
+
+<% if @sensors == nil || @sensors.empty? %>
+  <i>None</i>
+<% else %>
+  <ul>
+    <% @sensors.each do |sensor| %>
+      <li><%=sensor.name %></li>
+    <% end %>
+  </ul>
+<% end %>

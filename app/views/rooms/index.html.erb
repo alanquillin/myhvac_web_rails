@@ -1,0 +1,15 @@
+<h2>Rooms <%= link_to '[Add]', new_room_path %></h2>
+
+<h3>Active Rooms</h3>
+<ul>
+  <% @rooms.active.each do |room| %>
+      <li><%= link_to room.name, room %></li>
+  <% end %>
+</ul>
+
+<h3>Inactive Rooms</h3>
+<ul>
+  <% @rooms.inactive.each do |room| %>
+      <li><%= link_to room.name, room %></li>
+  <% end %>
+</ul>
