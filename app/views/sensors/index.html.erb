@@ -1,4 +1,6 @@
-<h2>Sensors <%= link_to '[Add]', new_sensor_path %></h2>
+<h2>Sensors <%= link_to new_sensor_path, :class => 'btn btn-lg' do %>
+      <i class='glyphicon glyphicon-plus-sign'></i>
+  <% end %></h2>
 
 <% if @sensors.empty? %>
   <i>None</i>

@@ -11,32 +11,32 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :name %><br/>
-      <%= f.text_field :name %>
+    <div class="field form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= f.label :manufacturer_id, 'Manufacturer Id' %><br/>
-      <%= f.text_field :manufacturer_id %>
+    <div class="field form-group">
+      <%= f.label :manufacturer_id, 'Manufacturer Id' %>
+      <%= f.text_field :manufacturer_id, :class => 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= f.label :active %><br/>
-      <%= f.check_box :active %>
+    <div class="field checkbox-inline">
+      <%= f.check_box :active %><%= f.label :active %>
     </div>
 
-    <div class="field">
-      <%= f.label :room_id%><br/>
-      <%= f.collection_select :room_id, Room.order(:name),:id,:name, include_blank: true %>
+    <div class="field form-group">
+      <%= f.label :room_id%>
+      <%= f.collection_select :room_id, Room.order(:name),:id,:name, {:include_blank => true}, {:class => 'form-control'} %>
     </div>
 
-    <div class="field">
-      <%= f.label :sensor_type_id%><br/>
-      <%= f.collection_select :sensor_type_id, SensorType.all,:id,:model_with_manufacturer, include_blank: true %>
+    <div class="field form-group">
+      <%= f.label :sensor_type_id%>
+      <%= f.collection_select :sensor_type_id, SensorType.all,:id,:model_with_manufacturer, {:include_blank => true}, {:class => 'form-control'} %>
     </div>
 
-    <div class="action">
-      <%= f.submit %>
+    <div class="action form-group">
+      <%= link_to 'Cancel', @sensor, :class => 'btn btn-default' %>
+      <%= f.submit :class => 'btn btn-primary' %>
     </div>
 <% end %>

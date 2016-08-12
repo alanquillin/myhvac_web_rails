@@ -1,4 +1,4 @@
-<%= form_for(@room) do |f| %>
+<%= form_for @room do |f| %>
     <% if @room.errors.any? %>
       <div class="alert alert-dismissable alert-error">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -11,23 +11,23 @@
       </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :name %><br/>
-      <%= f.text_field :name %>
+    <div class="field form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => 'form-control' %>
     </div>
 
-    <div class="field">
-      <%= f.label :weight %><br/>
-      <%= f.text_field :weight %>
+    <div class="field form-group">
+      <%= f.label :weight %>
+      <%= f.text_field :weight, :class => 'form-control' %>
     </div>
 
 
-    <div class="field">
-      <%= f.label :active %><br/>
-      <%= f.check_box :active %>
+    <div class="field checkbox-inline">
+      <%= f.check_box :active, :class => 'form-control' %> <%= f.label :active %>
     </div>
 
-    <div class="action">
-      <%= f.submit %>
+    <div class="action form-group">
+      <%= link_to 'Cancel', @room, :class => 'btn btn-default' %>
+      <%= f.submit :class => 'btn btn-primary' %>
     </div>
 <% end %>

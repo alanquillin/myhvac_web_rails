@@ -1,4 +1,6 @@
-<h2>Rooms <%= link_to '[Add]', new_room_path %></h2>
+<h2>Rooms <%= link_to new_room_path, :class => 'btn btn-lg' do %>
+      <i class='glyphicon glyphicon-plus-sign'></i>
+  <% end %></h2>
 
 <h3>Active Rooms</h3>
 <ul>

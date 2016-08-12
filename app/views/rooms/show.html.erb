@@ -1,9 +1,18 @@
 <%= link_to '<< Rooms list', rooms_path %>
 
-<h2>Room: <%=@room.name %> <%= link_to '[Edit]', edit_room_path(@room) %></h2>
+<h2>Room: <%=@room.name %> </h2>
+
 <div>
   <strong>Weight:</strong>&nbsp;<%=@room.weight %><br/>
   <strong>Active:</strong>&nbsp;<%=@room.active ? 'Yes' : 'No' %>
+</div>
+<br/>
+<div>
+  <%= link_to edit_room_path(@room), :class => 'btn btn-default text-primary' do %>
+      <i class='glyphicon glyphicon-edit'></i> Edit
+  <% end %> <%= link_to @room, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'btn btn-default text-danger' do %>
+      <i class='glyphicon glyphicon-trash'></i> Delete
+  <% end %>
 </div>
 
 <h3>Sensors:</h3>
