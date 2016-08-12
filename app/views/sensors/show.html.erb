@@ -15,13 +15,11 @@
   <% end %>
 </div>
 <br/>
-<h3>Measurements:</h3>
-<% if @sensor.measurements.empty? %>
-  <i>None</i>
-<% else %>
-    <ul>
-      <% @sensor.measurements.each do |m| %>
-        <li><%="#{m.data} (#{m.measurement_type.name}) @ #{m.recorded_date}" %></li>
-      <% end %>
-    </ul>
-<% end %>
+<h3>Recent Measurements:</h3>
+<div id="sensorMeasurementGrid" ></div>
+
+<script language="JavaScript">
+  $(document).ready(function(){
+    initSenorMeasurementGrip(<%= @sensor.id %>)
+  });
+</script>

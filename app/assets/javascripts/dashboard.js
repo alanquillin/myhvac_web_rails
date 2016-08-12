@@ -1,11 +1,6 @@
 var timer;
 var tempGage = null;
 
-$(document).ready(function(){
-    setTempGage($('#gauge').data('initial-temp'));
-    updateSystemDetails();
-});
-
 function updateSystemDetails(){
     console.log('Retrieving system details...');
     return $.ajax({
@@ -52,4 +47,9 @@ function setTempGage(temp){
     else{
         tempGage.refresh(temp);
     }
+}
+
+function showSensorMeasurementModal(sensor_id){
+    $('#roomTempHistory').modal('show');
+    initSenorMeasurementGrip(sensor_id)
 }

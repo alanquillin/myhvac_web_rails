@@ -6,9 +6,12 @@ class ApplicationController < ActionController::Base
 
   def paginate(query, defaults = {})
     load_pagination(defaults)
-    query.order("#{@sort_column} #{@sort_direction}")
-        .offset((@page - 1) * @limit)
-        .limit(@limit)
+    query = query.order("#{@sort_column} #{@sort_direction}")
+                 .offset((@page - 1) * @limit)
+    if @limit > 0
+        query = query.limit(@limit)
+    end
+    query
   end
 
   def load_pagination(defaults = {})

@@ -9,7 +9,7 @@
       <th>Room</th>
       <th>Temp</th>
       <th>Rec Date</th>
-      <th>&nbsp;</th>
+      <th>History</th>
     </tr>
     </thead>
     <tbody>
@@ -19,7 +19,12 @@
           <td><%= room.current_temp.nil? ? raw('<i>N/A</i>') : "#{room.current_temp}° F" %></td>
           <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.strftime('%x')}
               <br/>#{room.latest_temp_rec_date.strftime('%r')}") %></td>
-          <td>&nbsp;</td>
+          <td><% room.sensors.each do |sensor| %>
+                <button class="btn btn-default btn-xs" onclick="showSensorMeasurementModal(<%= sensor.id %>)" title="<%= sensor.name %>: Measurement History">
+                  <i class="glyphicon glyphicon-list-alt" />
+                </button>
+              <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

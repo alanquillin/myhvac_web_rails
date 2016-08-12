@@ -3,6 +3,7 @@ class MeasurementsController < ApplicationController
 
   def index
     @measurements = @sensor.measurements
+    @count = @measurements.count
   end
 
   def create
@@ -16,12 +17,16 @@ class MeasurementsController < ApplicationController
   end
 
   def temperature_measurements
-    @measurements = paginate(@sensor.measurements.temperatures)
+    all = @sensor.measurements.temperatures
+    @measurements = paginate(all)
+    @count = all.count
     render :index, status: :ok
   end
 
   def humidity_measurements
-    @measurements = paginate(@sensor.measurements.humidities)
+    all = @sensor.measurements.humidities
+    @measurements = paginate(all)
+    @count = all.count
     render :index, status: :ok
   end
 

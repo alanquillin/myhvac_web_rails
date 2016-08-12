@@ -12,3 +12,5 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( raphael-2.1.4.min.js )
 Rails.application.config.assets.precompile += %w( justgage.js )
+Rails.application.config.assets.precompile += %w( pgGrid.js )
+Rails.application.config.assets.precompile += %w( pgGrid.bundle.css )
