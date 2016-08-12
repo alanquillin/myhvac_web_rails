@@ -1,0 +1,9 @@
+timer = setTimeout(updateSystemDetails, 10000);
+$('#dashboardError').hide();
+setTempGage(<%= current_temp %>);
+$('#systemDetailsState').text('Unknown');
+$('#systemDetailsProgram').text('Unknown');
+$('#systemDetailsLastUpdatedTime').text('<%=j DateTime.now.strftime('%x @ %r') %>');
+
+$("#dashboardActiveRooms").html("<%=j render :partial => 'dashboard/rooms', locals: {rooms: @dashboard.rooms.active } %>")
+$("#dashboardInactiveRooms").html("<%=j render :partial => 'dashboard/rooms', locals: {rooms: @dashboard.rooms.inactive, active: false } %>")

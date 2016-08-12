@@ -17,10 +17,16 @@
         <tr>
           <td><%= room.name %></td>
           <td><%= room.current_temp.nil? ? raw('<i>N/A</i>') : "#{room.current_temp}° F" %></td>
-          <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.strftime('%x')}<br/>#{room.latest_temp_rec_date.strftime('%r')}") %></td>
+          <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.strftime('%x')}
+              <br/>#{room.latest_temp_rec_date.strftime('%r')}") %></td>
           <td>&nbsp;</td>
         </tr>
       <% end %>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">Last Updated: <%=DateTime.now.strftime('%x @ %r') %></td>
+      </tr>
+    </tfoot>
    </table>
 </div>
