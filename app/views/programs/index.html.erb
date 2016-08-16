@@ -1,0 +1,13 @@
+<h2>Programs <%= link_to new_program_path, :class => 'btn btn-lg' do %>
+      <i class='glyphicon glyphicon-plus-sign'></i>
+  <% end %></h2>
+
+<% if @programs.empty? %>
+    <i>None</i>
+<% else %>
+    <ul>
+      <% @programs.each do |program| %>
+          <li><%= link_to program.name, program %></li>
+      <% end %>
+    </ul>
+<% end %>

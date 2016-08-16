@@ -13,16 +13,17 @@ Rails.application.routes.draw do
     resources :measurements, only: [:index, :create]
   end
 
-  get 'sensors/:sensor_id/measurements/temperatures',
-      to: 'measurements#temperature_measurements',
+  get 'sensors/:sensor_id/measurements/temperatures', to: 'measurements#temperature_measurements',
       constraints: lambda { |req| req.format == :json }
-  post 'sensors/:sensor_id/measurements/temperatures',
-       to: 'measurements#create_temperature_measurement',
+  post 'sensors/:sensor_id/measurements/temperatures', to: 'measurements#create_temperature_measurement',
        constraints: lambda { |req| req.format == :json }
-  get 'sensors/:sensor_id/measurements/humidities',
-      to: 'measurements#humidity_measurements',
+  get 'sensors/:sensor_id/measurements/humidities', to: 'measurements#humidity_measurements',
       constraints: lambda { |req| req.format == :json }
-  post 'sensors/:sensor_id/measurements/humidities',
-       to: 'measurements#create_humidity_measurement',
+  post 'sensors/:sensor_id/measurements/humidities', to: 'measurements#create_humidity_measurement',
        constraints: lambda { |req| req.format == :json }
+
+  resources :programs do
+    resources :schedules, only: [:new, :create, :edit, :update, :destroy]
+    resources :schedules, only: [:index, :show], constraints: lambda { |req| req.format == :json }
+  end
 end

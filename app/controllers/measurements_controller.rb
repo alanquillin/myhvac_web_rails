@@ -104,13 +104,7 @@ class MeasurementsController < ApplicationController
   end
 
   def load_sensor
-    id = params[:sensor_id]
-
-    if id.to_i.to_s == id
-      @sensor = Sensor.find_by_any_id(id)
-    else
-      @sensor = Sensor.find_by_manufacturer_id(id)
-    end
+    @sensor = Sensor.find_by_any_id(params[:sensor_id])
   end
 
   def convert_celsius_to_fahrenheit(c)

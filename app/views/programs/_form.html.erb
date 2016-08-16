@@ -1,0 +1,23 @@
+<%= form_for @program do |f| %>
+    <% if @program.errors.any? %>
+        <div class="alert alert-dismissable alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <h3><%=pluralize(@program.errors.count, 'error')%> were found trying to save the room data.</h3>
+          <ul>
+            <% @program.errors.full_messages.each do |error_mgs| %>
+                <li><%=error_mgs %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+
+    <div class="action form-group">
+      <%= link_to 'Cancel', @program, :class => 'btn btn-default' %>
+      <%= f.submit :class => 'btn btn-primary' %>
+    </div>
+<% end %>

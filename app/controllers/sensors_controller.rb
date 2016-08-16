@@ -53,13 +53,7 @@ class SensorsController < ApplicationController
   private
 
   def set_sensor
-    id = params[:id]
-
-    if id.to_i.to_s == id
-      @sensor = Sensor.find_by_any_id(id)
-    else
-      @sensor = Sensor.find_by_manufacturer_id(id)
-    end
+    @sensor = Sensor.find_by_any_id(params[:id])
   end
 
   def sensor_params(*filters)

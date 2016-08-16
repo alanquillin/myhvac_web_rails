@@ -14,10 +14,19 @@ class Sensor < ApplicationRecord
 
   scope :active, lambda { where('sensors.active') }
   scope :inactive, lambda { where('NOT sensors.active') }
-  scope :find_by_any_id, lambda { |id| where('sensors.id = :sid OR lower(sensors.manufacturer_id) = lower(:mid)',
-                                             {:sid => id.to_i, :mid => id.to_s}).first}
+
   scope :find_by_manufacturer_id, lambda { |id| where('lower(sensors.manufacturer_id) = lower(:mid)',
-                                                      :mid => id.to_s).first}
+                                                      :mid => id.to_s).first }
+  scope :find_by_any_id, lambda { |id| where('sensors.id = :sid OR lower(sensors.manufacturer_id) = lower(:mid)',
+                                             {:sid => id.to_i, :mid => id.to_s}).first }
+  # scope :find_by_any_id, lambda do |id|
+  #   if id.to_i.to_s == id
+  #     where('sensors.id = :sid OR lower(sensors.manufacturer_id) = lower(:mid)',
+  #           {:sid => id.to_i, :mid => id.to_s}).first
+  #   else
+  #     find_by_manufacturer_id(id)
+  #   end
+  # end
 
   def current_temp
     measurement = measurements.temperatures.first

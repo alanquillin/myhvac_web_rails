@@ -1,0 +1,37 @@
+<%= form_for @schedule do |f| %>
+    <% if @schedule.errors.any? %>
+        <div class="alert alert-dismissable alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <h3><%=pluralize(@schedule.errors.count, 'error')%> were found trying to save the room data.</h3>
+          <ul>
+            <% @schedule.errors.full_messages.each do |error_mgs| %>
+                <li><%=error_mgs %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= f.label :cool_temp %>
+      <%= f.text_field :cool_temp, :class => 'form-control'  %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :heat_temp %>
+      <%= f.text_field :heat_temp, :class => 'form-control'  %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :time_of_day %>
+      <%= f.time_select :time_of_day, {minute_step: 15, ampm: true} %>
+    </div>
+    <div class="field form-group">
+      <%= f.label :days_of_week %><br />
+      <%= f.select :days_of_week_values, days_of_week_selector_options, {}, {:multiple => true, :class => 'form-control', :size => 7} %>
+    </div>
+
+    <div class="action form-group">
+      <%= link_to 'Cancel', @program, :class => 'btn btn-default' %>
+      <%= f.submit :class => 'btn btn-primary' %>
+    </div>
+<% end %>

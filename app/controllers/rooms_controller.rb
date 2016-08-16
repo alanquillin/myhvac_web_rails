@@ -32,9 +32,10 @@ class RoomsController < ApplicationController
   end
 
   def destroy
+    name = @room.name
     @room.destroy
 
-    redirect_to rooms_path, notice: "Room \"#{@room.name}\" removed successfully."
+    redirect_to rooms_path, notice: "Room \"#{name}\" removed successfully."
   end
 
   private

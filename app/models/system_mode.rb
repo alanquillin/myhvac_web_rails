@@ -1,0 +1,3 @@
+class SystemMode < ApplicationRecord
+
+end
