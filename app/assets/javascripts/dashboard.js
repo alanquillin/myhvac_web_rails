@@ -1,5 +1,7 @@
 var timer;
 var tempGage = null;
+var dashboardPaths = [];
+var autoRefresh = true;
 
 function updateSystemDetails(){
     console.log('Retrieving system details...');
@@ -14,7 +16,7 @@ function updateSystemDetails(){
             setdashboardErrorMsg('Unable to connect to the service... Connection refused');
         }
         $('#dashboardError').show();
-        timer = setTimeout(updateSystemDetails, 25000);
+        setUpdateSystemDetailsTimer(60000);
     });
 }
 
@@ -51,5 +53,20 @@ function setTempGage(temp){
 
 function showSensorMeasurementModal(sensor_id){
     $('#roomTempHistory').modal('show');
-    initSenorMeasurementGrip(sensor_id)
+    initSenorMeasurementGrip(sensor_id);
+}
+
+function setUpdateSystemDetailsTimer(timeout){
+    timeout = typeof timeout !== 'undefined' ? timeout : 25000;
+    var isDashboard = false;
+
+    for(i = 0; i < dashboardPaths.length; i++){
+        if(window.location.pathname == dashboardPaths[i]){
+            isDashboard = true;
+        }
+    }
+
+    if(isDashboard == true && autoRefresh == true) {
+        timer = setTimeout(updateSystemDetails, timeout);
+    }
 }

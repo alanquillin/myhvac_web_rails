@@ -17,6 +17,11 @@
       <%= render 'system_status', dashboard: @dashboard %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-8">
+      <%= check_box_tag :dashboardAutoUpdate, 'Auto Update', true %> Auto update | Last Updated: <span id="dashboardLastAutoUpdate"><%=j DateTime.now.strftime('%x @ %r') %></span>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id='roomTempHistory' tabindex="-1" role="dialog">
@@ -35,7 +40,18 @@
 
 <script language="JavaScript">
   $(document).ready(function(){
+    dashboardPaths = ['<%= root_path %>', '<%=dashboard_path %>'];
     setTempGage(<%= current_temp %>);
     updateSystemDetails();
+
+    $('#dashboardAutoUpdate').change(function(){
+      var $this = $(this);
+      if ($this.is(':checked')) {
+        autoRefresh = true;
+        setUpdateSystemDetailsTimer();
+      } else {
+        autoRefresh = false;
+      }
+    });
   });
 </script>
