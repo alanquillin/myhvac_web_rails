@@ -37,12 +37,16 @@
     </nav>
 
     <div class="container">
-      <div class="starter-template">
         <h1>&nbsp;</h1>
-        <%= content_tag :p, notice, :class => 'notice' if notice.present? %>
-        <%= content_tag :p, alert, :class => 'alert' if alert.present? %>
+        <%= content_tag :div, :class => 'alert alert-dismissable alert-success' do %>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p><%= notice %></p>
+        <% end if notice.present? %>
+        <%= content_tag :div, :class => 'alert alert-dismissable alert-danger' do %>
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p><%= alert %></p>
+        <% end if alert.present? %>
         <%= yield %>
-      </div>
     </div>
 
   </body>

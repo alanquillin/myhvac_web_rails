@@ -1,5 +1,6 @@
 class SensorsController < ApplicationController
   before_action :set_sensor, only: [:show, :edit, :update, :destroy]
+
   def index
     @sensors = Sensor.all
   end

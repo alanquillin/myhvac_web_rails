@@ -1,8 +1,8 @@
 <%= form_for @room do |f| %>
     <% if @room.errors.any? %>
-      <div class="alert alert-dismissable alert-error">
+      <div class="alert alert-dismissable alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h3><%=pluralize(@room.errors.count, 'error')%> were found trying to save the room data.</h3>
+        <p><%=pluralize(@room.errors.count, 'error')%> found trying to save the room data.</p>
         <ul>
           <% @room.errors.full_messages.each do |error_mgs| %>
             <li><%=error_mgs %></li>
@@ -23,7 +23,7 @@
 
 
     <div class="field checkbox-inline">
-      <%= f.check_box :active, :class => 'form-control' %> <%= f.label :active %>
+      <%= f.check_box :active%> <%= f.label :active %>
     </div>
 
     <div class="action form-group">

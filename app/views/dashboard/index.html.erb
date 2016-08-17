@@ -14,17 +14,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Current Temp / Status</div>
-        <div class="panel-body">
-          <div id="systemDetailsContent">
-            <div id="gauge" class="200x160px" data-initial-temp="<%= current_temp %>"></div>
-            <div>System State: <strong><span id="systemDetailsState">Unknown</span></strong> </div>
-            <div>Program: <strong><span id="systemDetailsProgram">Unknown</span></strong> </div>
-            <div>Last Updated: <span id="systemDetailsLastUpdatedTime"><%=DateTime.now.strftime('%x @ %r') %></span> </div>
-          </div>
-        </div>
-      </div>
+      <%= render 'system_status', dashboard: @dashboard %>
     </div>
   </div>
 </div>
@@ -45,7 +35,7 @@
 
 <script language="JavaScript">
   $(document).ready(function(){
-    setTempGage($('#gauge').data('initial-temp'));
+    setTempGage(<%= current_temp %>);
     updateSystemDetails();
   });
 </script>

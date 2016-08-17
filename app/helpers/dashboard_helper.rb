@@ -5,4 +5,10 @@ module DashboardHelper
 
     c_temp.to_f.round(2)
   end
+
+  def current_program
+    return 'Unknown' if @dashboard.current_program.nil?
+
+    return @dashboard.current_program.name
+  end
 end

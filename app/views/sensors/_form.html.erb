@@ -1,8 +1,8 @@
 <%= form_for(@sensor) do |f| %>
     <% if @sensor.errors.any? %>
-        <div class="alert alert-dismissable alert-error">
+        <div class="alert alert-dismissable alert-danger">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <h3><%=pluralize(@sensor.errors.count, 'error')%> were found trying to save the room data.</h3>
+          <p><%=pluralize(@sensor.errors.count, 'error')%> found trying to save the room data.</p>
           <ul>
             <% @sensor.errors.full_messages.each do |error_mgs| %>
                 <li><%=error_mgs %></li>

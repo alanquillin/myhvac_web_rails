@@ -16,7 +16,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to rooms_path, notice: 'Room successfully created!'
     else
-      render action: new
+      render action: :new
     end
   end
 
