@@ -1,0 +1,34 @@
+<% if @program.schedules.empty? %>
+    <i>None</i>
+<% else %>
+    <table class="table table-condensed program-schedule">
+      <thead>
+      <tr>
+        <td>Schedule</td>
+        <td>Cool Temp</td>
+        <td>Heat Temp</td>
+        <td>&nbsp;</td>
+      </tr>
+      </thead>
+      <tbody>
+      <% Date::DAYNAMES.each_with_index do |day, i| %>
+          <tr class="day-of-week">
+            <td colspan="4"><%= day %></td>
+          </tr>
+          <% schedules_for_day(@program.schedules, i).each do |schedule| %>
+              <tr class="program">
+                <td><%= schedule.time_of_day.strftime('%I:%M %p') %></td>
+                <td><%= print_temp(schedule.cool_temp) %></td>
+                <td><%= print_temp(schedule.heat_temp) %></td>
+                <td><%= link_to edit_program_schedule_path(@program, schedule) do %>
+                      <i class='glyphicon glyphicon-edit'></i>
+                  <% end %>&nbsp<%= link_to program_schedule_path(@program, schedule), method: :delete, data: {confirm: 'Are you sure?'}, :class => 'text-danger' do %>
+                      <i class='glyphicon glyphicon-trash'></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

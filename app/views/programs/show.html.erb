@@ -1,3 +1,5 @@
+<%= link_to '<< Programs', programs_path %>
+
 <h2>Program: <%= @program.name %></h2>
 
 <div>
@@ -12,23 +14,4 @@
       <i class='glyphicon glyphicon-plus-sign'></i>
   <% end %></h3>
 
-<% if @program.schedules.empty? %>
-    <i>None</i>
-<% else %>
-    <ul>
-      <% Date::DAYNAMES.each_with_index do |day, i| %>
-        <li><%= day %>
-          <ul>
-            <% schedules_for_day(@program.schedules, i).each do |schedule| %>
-              <li><%=schedule.time_of_day.strftime('%I:%M %p') %>&nbsp<%= link_to edit_program_schedule_path(schedule) do %>
-                    <i class='glyphicon glyphicon-edit'></i>
-                  <% end %>&nbsp<%= link_to schedule, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'text-danger' do %>
-                    <i class='glyphicon glyphicon-trash'></i>
-                <% end %></li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-
-    </ul>
-<% end %>
+<%= render 'schedule_by_day' %>

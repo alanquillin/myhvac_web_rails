@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   post 'sensors/:sensor_id/measurements/humidities', to: 'measurements#create_humidity_measurement',
        constraints: lambda { |req| req.format == :json }
 
-  resources :dashboard, only: [:index]
-
   resources :rooms do
     resources :sensors, controller: :room_sensors, only: [:index, :show] do
       resources :measurements, only: [:index, :show], constraints: lambda { |req| req.format == :json }

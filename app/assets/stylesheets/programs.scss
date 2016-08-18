@@ -1,3 +1,27 @@
 // Place all the styles related to the programs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.program-schedule {
+  thead {
+    td{
+      font-weight: bold;
+    }
+  }
+  tbody {
+    tr.day-of-week {
+      td {
+        font-weight: bold;
+      }
+    }
+    tr.program{
+      td:first-child {
+        padding-left: 25px;
+      }
+      td:last-child {
+        width: 20px;
+        white-space: nowrap
+      }
+    }
+  }
+}

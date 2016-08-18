@@ -4,7 +4,9 @@ var dashboardPaths = [];
 var autoRefresh = true;
 
 function updateSystemDetails(){
-    console.log('Retrieving system details...');
+    if(autoRefresh == false)
+        return;
+
     return $.ajax({
         type: "GET",
         url: "/dashboard.js"
@@ -21,13 +23,11 @@ function updateSystemDetails(){
 }
 
 function setdashboardErrorMsg(msg){
-    console.log('Balz... Last call to system failed: ' + msg)
     $('#dashboardErrorMessage').text(msg);
     $('#dashboardErrorTime').text(new Date().toLocaleString());
 }
 
 function setTempGage(temp){
-    console.log('Setting the temp guage to:' + temp)
     if(tempGage == null){
         tempGage = new JustGage({
             id: 'gauge',
@@ -36,7 +36,6 @@ function setTempGage(temp){
             max: 100,
             title: 'Aggregate Temp',
             levelColors: ['#c1e2b3', '#2b542c'],
-            //levelColors: ['#3c763d', '#2b542c', '#dff0d8', '#c1e2b3', '#d0e9c6'],
             symbol: '° F',
             shadowOpacity: .2,
             startAnimationTime: 1000,
@@ -69,4 +68,26 @@ function setUpdateSystemDetailsTimer(timeout){
     if(isDashboard == true && autoRefresh == true) {
         timer = setTimeout(updateSystemDetails, timeout);
     }
+}
+
+function switchAutoUpdate(state){
+    if (state) {
+        autoRefresh = true;
+        setUpdateSystemDetailsTimer();
+    } else {
+        autoRefresh = false;
+        timer = null;
+    }
+}
+
+function setAutoUpdateSwitch(){
+    var autoUpdateSwitch = $('#dashboardAutoUpdate');
+    console.log(autoUpdateSwitch);
+    autoUpdateSwitch.bootstrapSwitch();
+    autoUpdateSwitch.change(function(){
+        switchAutoUpdate($(this).is(':checked'));
+    });
+    autoUpdateSwitch.on('switchChange.bootstrapSwitch', function(event, state) {
+        switchAutoUpdate(state);
+    });
 }

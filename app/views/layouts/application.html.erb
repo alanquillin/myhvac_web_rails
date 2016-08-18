@@ -6,11 +6,13 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'pgGrid.bundle' %>
+    <%= stylesheet_link_tag 'bootstrap-switch.min' %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'raphael-2.1.4.min' %>
     <%= javascript_include_tag 'justgage' %>
     <%= javascript_include_tag 'pgGrid' %>
+    <%= javascript_include_tag 'bootstrap-switch.min' %>
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
@@ -23,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;My HVAC</a>
+          <a class="navbar-brand" href="<%= root_path %>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;My HVAC</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
