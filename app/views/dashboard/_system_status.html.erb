@@ -4,10 +4,29 @@
     <div id="systemDetailsContent">
       <div id="gauge" class="200x160px"></div>
       <div>System State: <strong><span id="systemDetailsState">Unknown</span></strong> </div>
-      <div>System Mode: <strong><span id="systemDetailsMode"><%= @dashboard.system_mode.name %></span>
-      <% if @dashboard.system_mode.has_programs %>
-          (<span id="systemDetailsProgram"><%= current_program %></span>)
-      <% end %></strong></div>
+      <div>System Mode: <strong><span id="systemDetailsMode"><%= system_mode(@dashboard) %></span>
+      <% if @dashboard.mode.has_programs %>
+          (<span id="systemDetailsProgram"><%= current_program(@dashboard) %></span>)
+      <% end %><button class="btn btn-xs btn-primary" type="button" onclick="showSystemSettingsEditForm()">Change</button></strong></div>
+      <div class="collapse" id="changeSystemModeContainer">
+        <div class="well change-system-mode-body">
+          <%=form_for @dashboard.system_settings, url: update_system_settings_path(@dashboard.system_settings), remote: true do |f|%>
+              <div class="field form-group">
+                <%= f.label 'System Mode'%>
+                <%= f.collection_select :system_mode_id, SystemMode.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'systemModeSelector'} %>
+              </div>
+
+              <div class="field form-group">
+                <%= f.label 'Program'%>
+                <%= f.collection_select :current_program_id, Program.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'programSelector'} %>
+              </div>
+              <div class="action form-group">
+                <button class="btn btn-default" type="button" onclick="hideSystemSettingsEditForm()">Cancel</button>
+                <%= f.submit :class => 'btn btn-primary', :id => 'submitEditSystemSettings', :value => 'Update', :disabled => 'disabled' %>
+              </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

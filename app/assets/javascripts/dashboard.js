@@ -91,3 +91,17 @@ function setAutoUpdateSwitch(){
         switchAutoUpdate(state);
     });
 }
+
+function showSystemSettingsEditForm(){
+    $('#changeSystemModeContainer').collapse('show');
+    var systemModeSelector = $('#systemModeSelector');
+    var submitBtn = $('#submitEditSystemSettings');
+
+    $('.update-system-setting-field').on('change', function(){
+        submitBtn.prop("disabled",false);
+    });
+}
+
+function hideSystemSettingsEditForm() {
+    $('#changeSystemModeContainer').collapse('hide');
+}

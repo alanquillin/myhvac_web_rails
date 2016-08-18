@@ -6,9 +6,15 @@ module DashboardHelper
     c_temp.to_f.round(2)
   end
 
-  def current_program
-    return 'Unknown' if @dashboard.current_program.nil?
+  def current_program(obj)
+    return 'Unknown' if obj.nil? || obj.current_program.nil?
 
-    return @dashboard.current_program.name
+    obj.current_program.name
+  end
+
+  def system_mode(obj)
+    return 'Unknown' if obj.nil? || obj.mode.nil?
+
+    obj.mode.name
   end
 end

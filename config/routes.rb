@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root :to => 'dashboard#index'
 
   get 'dashboard', to: 'dashboard#index', as: :dashboard
+  patch 'dashboard/system_settings/:id', to: 'dashboard#update_system_settings', as: :update_system_settings
 
   get 'system/ping'
 

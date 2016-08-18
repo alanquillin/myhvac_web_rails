@@ -1,13 +1,18 @@
 class Dashboard
   def initialize(rooms, system_settings)
     @rooms = rooms
-    @system_mode = system_settings.mode
-    @current_program = system_settings.current_program
+    @system_settings = system_settings
   end
 
-  attr_reader :rooms
-  attr_reader :system_mode
-  attr_reader :current_program
+  attr_reader :rooms, :system_settings
+
+  def mode
+    @system_settings.mode
+  end
+
+  def current_program
+    @system_settings.current_program
+  end
 
   def current_temp
     cnt = 0
