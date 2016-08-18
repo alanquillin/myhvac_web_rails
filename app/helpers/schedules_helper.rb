@@ -1,6 +1,6 @@
 module SchedulesHelper
   def schedules_for_day(schedules, day_i)
-    schedules.select {|schedule| schedule.days_of_week_indexes.include? day_i}
+    schedules.select {|schedule| schedule.days_of_week_indexes.include? day_i}.sort_by {|schedule| schedule.time_of_day}
   end
 
   def days_of_week_selector_options
