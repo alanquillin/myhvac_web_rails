@@ -104,7 +104,7 @@ class MeasurementsController < ApplicationController
   end
 
   def load_sensor
-    @sensor = Sensor.find_by_any_id(params[:sensor_id])
+    @sensor = Sensor.find_by_any_id(params[:sensor_id]).first
   end
 
   def convert_celsius_to_fahrenheit(c)
