@@ -1,13 +1,13 @@
 class CreateProgramsTable < ActiveRecord::Migration[5.0]
   def change
     create_table :programs do |t|
-      t.string :name
+      t.string :name, null: false, index:true, unique: true
 
       t.timestamps
     end
 
     create_table :program_schedules do |t|
-      t.integer :program_id, null: false, index:true
+      t.integer :program_id, null: false, index: true
       t.float :cool_temp
       t.float :heat_temp
       t.integer :days_of_week_bin_aggr, null: false, comment: 'This value is a binary representation of the days of week for the schedule.  Sunday=1 -> Saturday=64.  Ex: Monday, Wednesday, Firday = 42, Sunday-Saturday=127'
@@ -27,7 +27,7 @@ class CreateProgramsTable < ActiveRecord::Migration[5.0]
     end
 
     create_table :system_modes do |t|
-      t.string :name, null: false, index: true
+      t.string :name, null: false, index: true, unique: true
       t.boolean :has_programs, null: false, index: true, default: false
 
       t.timestamps

@@ -2,6 +2,7 @@ class Room < ApplicationRecord
   has_many :sensors
 
   validates_presence_of :name
+  validates_uniqueness_of :name
 
   scope :active, lambda { where('rooms.active') }
   scope :inactive, lambda { where('NOT rooms.active') }

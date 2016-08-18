@@ -9,6 +9,7 @@ class Sensor < ApplicationRecord
   has_many :measurements
 
   validates_presence_of :name
+  validates_uniqueness_of :name
   validates_presence_of :manufacturer_id
   validates_uniqueness_of :manufacturer_id
 

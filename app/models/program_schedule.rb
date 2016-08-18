@@ -4,7 +4,7 @@ class ProgramSchedule < ApplicationRecord
   validates_presence_of :days_of_week_bin_aggr
   validates_presence_of :program_id
   validates_presence_of :time_of_day
-  validate :validate_presence_of_cool_or_heat_value
+  validate :validate_cool_or_heat_values
 
   def days_of_week
     build_days_of_week_part_lists unless defined? @days_of_week
@@ -26,12 +26,24 @@ class ProgramSchedule < ApplicationRecord
 
   private
 
-  def validate_presence_of_cool_or_heat_value
+  def validate_cool_or_heat_values
     logger.debug "Validating cool/heat temps exist.  Cool: #{cool_temp}, Heat: #{heat_temp}"
     if cool_temp.nil? && heat_temp.nil?
       errors.add(:cool_temp, 'must be set if no Heat temp is set')
       errors.add(:heat_temp, 'must be set if no Cool temp is set')
       return false
+    end
+
+    if cool_temp.present? && heat_temp.present?
+      if cool_temp < heat_temp
+        errors.add(:cool_temp, 'cannot be less than heat_temp')
+        errors.add(:heat_temp, 'cannot be greater than cool_temp')
+      end
+
+      if cool_temp - heat_temp < 2
+        errors.add(:cool_temp, 'must be at least 2 degrees higher than heat_temp')
+        errors.add(:heat_temp, 'must be at least 2 degrees lower than cool_temp')
+      end
     end
 
     true
