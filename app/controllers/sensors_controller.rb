@@ -54,7 +54,7 @@ class SensorsController < ApplicationController
   private
 
   def set_sensor
-    @sensor = Sensor.find_by_any_id(params[:id]).first
+    @sensor = Sensor.find_by_any_id(params[:id]).first!
   end
 
   def sensor_params(*filters)

@@ -16,6 +16,10 @@ class MeasurementsController < ApplicationController
     end
   end
 
+  def show
+    @measurement = @sensor.measurements.find(params[:id])
+  end
+
   def temperature_measurements
     all = @sensor.measurements.temperatures
     @measurements = paginate(all)
