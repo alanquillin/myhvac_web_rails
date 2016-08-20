@@ -27,8 +27,9 @@ function setdashboardErrorMsg(msg){
     $('#dashboardErrorTime').text(new Date().toLocaleString());
 }
 
-function setTempGage(temp){
-    if(tempGage == null){
+function setTempGage(temp, force){
+    force = typeof force !== 'undefined' ? force : false;
+    if(tempGage == null || force){
         tempGage = new JustGage({
             id: 'gauge',
             value: temp,
@@ -50,9 +51,9 @@ function setTempGage(temp){
     }
 }
 
-function showSensorMeasurementModal(sensor_id){
+function showRoomMeasurementModal(room_id){
     $('#roomTempHistory').modal('show');
-    initSenorMeasurementGrip(sensor_id);
+    initRoomMeasurementGrip(room_id);
 }
 
 function setUpdateSystemDetailsTimer(timeout){
@@ -82,7 +83,6 @@ function switchAutoUpdate(state){
 
 function setAutoUpdateSwitch(){
     var autoUpdateSwitch = $('#dashboardAutoUpdate');
-    console.log(autoUpdateSwitch);
     autoUpdateSwitch.bootstrapSwitch();
     autoUpdateSwitch.change(function(){
         switchAutoUpdate($(this).is(':checked'));
@@ -104,4 +104,21 @@ function showSystemSettingsEditForm(){
 
 function hideSystemSettingsEditForm() {
     $('#changeSystemModeContainer').collapse('hide');
+}
+
+function initRoomMeasurementGrip(room_id){
+    var grid = $('#roomMeasurementGrid');
+    grid.empty();
+    grid.pgGrid({
+        url: '/rooms/' + room_id + '/measurements/temperatures.json',
+        dataModel: [
+            { name: 'Temp', index: 'data', sortable: false},
+            { name: 'Sensor Id', index: 'sensor_id'},
+            { name: 'Recorded Date', index: 'recorded_date'}
+        ],
+        title: '',
+        dataItemIndex: 'measurements',
+        sortColumn: 'recorded_date',
+        sortDirection: 'DESC'
+    }, true);
 }

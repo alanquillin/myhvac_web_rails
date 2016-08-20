@@ -1,4 +1,3 @@
 hideSystemSettingsEditForm();
 
-$('#systemDetailsMode').text('<%= system_mode(@system_setting) %>');
-$('#systemDetailsProgram').text('<%= current_program(@system_setting) %>');
+$('#systemModeContainer').html("<%=j render :partial => 'dashboard/system_settings', :locals => {system_settings: @system_settings} %>");

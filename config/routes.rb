@@ -6,10 +6,18 @@ Rails.application.routes.draw do
 
   get 'system/ping'
 
+  get 'rooms/:room_id/measurements/temperatures', to: 'measurements#temperature_measurements',
+      constraints: lambda { |req| req.format == :json }
+  get 'rooms/:room_id/sensors/:sensor_id/measurements/temperatures', to: 'measurements#temperature_measurements',
+      constraints: lambda { |req| req.format == :json }
   get 'sensors/:sensor_id/measurements/temperatures', to: 'measurements#temperature_measurements',
       constraints: lambda { |req| req.format == :json }
   post 'sensors/:sensor_id/measurements/temperatures', to: 'measurements#create_temperature_measurement',
        constraints: lambda { |req| req.format == :json }
+  get 'rooms/:room_id/measurements/humidities', to: 'measurements#humidity_measurements',
+      constraints: lambda { |req| req.format == :json }
+  get 'rooms/:room_id/sensors/:sensor_id/measurements/humidities', to: 'measurements#humidity_measurements',
+      constraints: lambda { |req| req.format == :json }
   get 'sensors/:sensor_id/measurements/humidities', to: 'measurements#humidity_measurements',
       constraints: lambda { |req| req.format == :json }
   post 'sensors/:sensor_id/measurements/humidities', to: 'measurements#create_humidity_measurement',

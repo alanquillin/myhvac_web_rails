@@ -1,5 +1,6 @@
 class MeasurementsController < ApplicationController
   before_action :load_sensor
+  before_action :load_room, :only => [:temperature_measurements, :humidity_measurements]
 
   def index
     @measurements = @sensor.measurements
@@ -21,14 +22,24 @@ class MeasurementsController < ApplicationController
   end
 
   def temperature_measurements
-    all = @sensor.measurements.temperatures
+    if @sensor.present?
+      all = @sensor.measurements.temperatures
+    else
+      all = @room.measurements.temperatures
+    end
+
     @measurements = paginate(all)
     @count = all.count
     render :index, status: :ok
   end
 
   def humidity_measurements
-    all = @sensor.measurements.humidities
+    if @sensor.present?
+      all = @sensor.measurements.humidities
+    else
+      all = @room.measurements.humidities
+    end
+
     @measurements = paginate(all)
     @count = all.count
     render :index, status: :ok
@@ -109,6 +120,10 @@ class MeasurementsController < ApplicationController
 
   def load_sensor
     @sensor = Sensor.find_by_any_id(params[:sensor_id]).first
+  end
+
+  def load_room
+    @room = Room.find(params[:room_id])
   end
 
   def convert_celsius_to_fahrenheit(c)

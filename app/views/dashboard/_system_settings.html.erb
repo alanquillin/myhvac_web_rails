@@ -1,0 +1,23 @@
+<div>System Mode: <strong><span id="systemDetailsMode"><%= system_mode(system_settings) %></span>
+  <% if system_settings.mode.has_programs %>
+      (<span id="systemDetailsProgram"><%= current_program(system_settings) %></span>)
+  <% end %><button class="btn btn-xs btn-primary" type="button" onclick="showSystemSettingsEditForm()">Change</button></strong></div>
+<div class="collapse" id="changeSystemModeContainer">
+  <div class="well change-system-mode-body">
+    <%=form_for system_settings, url: update_system_settings_path(system_settings), remote: true do |f|%>
+        <div class="field form-group">
+          <%= f.label 'System Mode'%>
+          <%= f.collection_select :system_mode_id, SystemMode.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'systemModeSelector'} %>
+        </div>
+
+        <div class="field form-group">
+          <%= f.label 'Program'%>
+          <%= f.collection_select :current_program_id, Program.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'programSelector'} %>
+        </div>
+        <div class="action form-group">
+          <button class="btn btn-default" type="button" onclick="hideSystemSettingsEditForm()">Cancel</button>
+          <%= f.submit :class => 'btn btn-primary', :id => 'submitEditSystemSettings', :value => 'Update', :disabled => 'disabled' %>
+        </div>
+    <% end %>
+  </div>
+</div>
