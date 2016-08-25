@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    @dashboard = Dashboard.new(Room.all, SystemSetting.first)
+    @dashboard = Dashboard.new
     respond_to do |format|
       format.html
       format.js

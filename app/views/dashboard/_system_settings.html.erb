@@ -21,3 +21,11 @@
     <% end %>
   </div>
 </div>
+<% if system_settings.mode.name != 'Off' %>
+    <div id="dashboardProgramDetails" class="row">
+      <div class="col-md-3 text-nowrap text-right text-primary" style=""><i class="glyphicon glyphicon-asterisk"></i><%= cool_temp(system_settings) %></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-3 text-nowrap text-left text-danger"><i class="glyphicon glyphicon-fire"></i><%= heat_temp(system_settings) %></div>
+    </div>
+<% end %>
