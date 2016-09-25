@@ -1,2 +1,2 @@
 myhvac_service:
-  base_uri: 192.168.1.8
+  base_uri: localhost:8080

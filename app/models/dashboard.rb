@@ -1,6 +1,6 @@
 class Dashboard
   def initialize
-    @myhvac_service_client = MyHVACService.new
+    @myhvac_service_client = MyhvacService.new
     reset
   end
 
@@ -38,22 +38,10 @@ class Dashboard
     if @system_state.nil?
       @system_state = @myhvac_service_client.system_state
     end
-    @system_state
+    @system_state['state']
   end
 
   def current_temp
-    cnt = 0
-    total_temp = 0.0
-
-    @rooms.active.each do |room|
-      if room.current_temp.present?
-        cnt += 1
-        total_temp += room.current_temp
-      end
-    end
-
-    return nil unless cnt > 0
-
-    total_temp / cnt
+    system_state['current_temp']
   end
 end

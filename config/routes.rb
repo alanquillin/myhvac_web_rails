@@ -12,21 +12,18 @@ Rails.application.routes.draw do
       constraints: lambda { |req| req.format == :json }
   get 'sensors/:sensor_id/measurements/temperatures', to: 'measurements#temperature_measurements',
       constraints: lambda { |req| req.format == :json }
-  post 'sensors/:sensor_id/measurements/temperatures', to: 'measurements#create_temperature_measurement',
-       constraints: lambda { |req| req.format == :json }
   get 'rooms/:room_id/measurements/humidities', to: 'measurements#humidity_measurements',
       constraints: lambda { |req| req.format == :json }
   get 'rooms/:room_id/sensors/:sensor_id/measurements/humidities', to: 'measurements#humidity_measurements',
       constraints: lambda { |req| req.format == :json }
   get 'sensors/:sensor_id/measurements/humidities', to: 'measurements#humidity_measurements',
       constraints: lambda { |req| req.format == :json }
-  post 'sensors/:sensor_id/measurements/humidities', to: 'measurements#create_humidity_measurement',
-       constraints: lambda { |req| req.format == :json }
 
   resources :rooms do
     resources :sensors, controller: :room_sensors, only: [:index, :show] do
       resources :measurements, only: [:index, :show], constraints: lambda { |req| req.format == :json }
     end
+    resources :measurements, only: [:index, :show], constraints: lambda { |req| req.format == :json }
   end
 
   resources :sensors do
