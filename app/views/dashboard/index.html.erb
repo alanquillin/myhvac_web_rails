@@ -7,14 +7,29 @@
     </div>
     <div class="col-md-8">
       <div id="dashboardActiveRooms">
-        <%= render 'rooms', rooms: @dashboard.rooms.active %>
+        <%= render 'rooms', :rooms => @dashboard.rooms.active %>
       </div>
       <div id="dashboardInactiveRooms">
-        <%= render 'rooms', rooms: @dashboard.rooms.inactive, active: false %>
+        <%= render 'rooms', :rooms => @dashboard.rooms.inactive, active: false %>
       </div>
     </div>
     <div class="col-md-4">
-      <%= render 'system_status', dashboard: @dashboard %>
+      <div class="panel panel-primary">
+
+        <div class="panel-heading">Current Temp / Status</div>
+        <div class="panel-body">
+          <div id="systemDetailsContent">
+            <div id="gauge" class="200x160px"></div>
+            <div id="systemStatusContainer">
+              <%= render 'system_status', :dashboard => @dashboard %>
+            </div>
+            <div id="systemModeContainer">
+              <%= render 'system_settings', :system_settings => @dashboard.system_settings %>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="row">
@@ -32,7 +47,7 @@
         <h4 class="modal-title" id="exampleModalLabel">Temperature History</h4>
       </div>
       <div class="modal-body">
-        <div id="sensorMeasurementGrid"></div>
+        <div id="roomMeasurementGrid"></div>
       </div>
     </div>
   </div>
@@ -40,9 +55,10 @@
 
 <script language="JavaScript">
   $(document).ready(function(){
+    hideSystemSettingsEditForm();
     dashboardPaths = ['<%= root_path %>', '<%=dashboard_path %>'];
-    setTempGage(<%= current_temp %>);
-    updateSystemDetails();
     setAutoUpdateSwitch();
+    setTempGage(<%= current_temp %>, true);
+    setUpdateSystemDetailsTimer();
   });
 </script>

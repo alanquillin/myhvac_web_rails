@@ -1,27 +1,47 @@
 class Dashboard
-  def initialize(rooms, system_settings)
-    @rooms = rooms
-    @system_mode = system_settings.mode
-    @current_program = system_settings.current_program
+  def initialize
+    @myhvac_service_client = MyhvacService.new
+    reset
   end
 
-  attr_reader :rooms
-  attr_reader :system_mode
-  attr_reader :current_program
+  def reset
+    @rooms = nil
+    @system_state = nil
+    @system_settings = nil
+  end
 
-  def current_temp
-    cnt = 0
-    total_temp = 0.0
-
-    rooms.active.each do |room|
-      if not room.current_temp.nil?
-        cnt += 1
-        total_temp += room.current_temp
-      end
+  def rooms
+    if @rooms.nil?
+      @rooms = Room.all
     end
 
-    return nil unless cnt > 0
+    @rooms
+  end
 
-    total_temp / cnt
+  def system_settings
+    if @system_settings.nil?
+      @system_settings = SystemSetting.first
+    end
+
+    @system_settings
+  end
+
+  def mode
+    self.system_settings.mode
+  end
+
+  def current_program
+    self.system_settings.current_program
+  end
+
+  def system_state
+    if @system_state.nil?
+      @system_state = @myhvac_service_client.system_state
+    end
+    @system_state['state']
+  end
+
+  def current_temp
+    system_state['current_temp']
   end
 end

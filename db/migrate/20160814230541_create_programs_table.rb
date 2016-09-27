@@ -19,8 +19,10 @@ class CreateProgramsTable < ActiveRecord::Migration[5.0]
     create_table :system_settings do |t|
       t.integer :current_program_id
       t.integer :system_mode_id, null: false
-      t.float :cool_temp
-      t.float :heat_temp
+      t.float :manual_cool_temp
+      t.float :manual_heat_temp
+      t.float :temporary_cool_temp
+      t.float :temporary_heat_temp
       t.boolean :active, null: false, index: true
 
       t.timestamps

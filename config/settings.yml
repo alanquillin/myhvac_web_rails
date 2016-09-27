@@ -1,0 +1,4 @@
+myhvac_service:
+  fake: false
+  default_fake_state:
+    state: 'Off'

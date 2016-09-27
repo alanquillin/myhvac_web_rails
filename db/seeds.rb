@@ -20,6 +20,24 @@ SensorType.create(:model =>'Uno', :manufacturer => 'Arduino')
 
 offMode = SystemMode.create(:name => 'Off')
 SystemMode.create(:name => 'Manual')
-SystemMode.create(:name => 'Program', :has_programs => true)
+SystemMode.create(:name => 'Auto', :has_programs => true)
 
 SystemSetting.create(:system_mode_id => offMode.id, :active => true)
+
+summer = Program.create(:name => 'Summer')
+fall = Program.create(:name => 'Fall')
+winter = Program.create(:name => 'Winter')
+spring = Program.create(:name => 'Spring')
+
+ProgramSchedule.create(:program_id => summer.id, :days_of_week_bin_aggr => 127, :cool_temp => 74.0, :time_of_day => Time.parse('08:00:00'))
+ProgramSchedule.create(:program_id => summer.id, :days_of_week_bin_aggr => 127, :cool_temp => 72.0, :time_of_day => Time.parse('17:00:00'))
+ProgramSchedule.create(:program_id => summer.id, :days_of_week_bin_aggr => 127, :cool_temp => 70.0, :time_of_day => Time.parse('20:00:00'))
+
+ProgramSchedule.create(:program_id => winter.id, :days_of_week_bin_aggr => 127, :heat_temp => 66.0, :time_of_day => Time.parse('08:00:00'))
+ProgramSchedule.create(:program_id => winter.id, :days_of_week_bin_aggr => 127, :heat_temp => 68.0, :time_of_day => Time.parse('20:00:00'))
+
+[spring, fall].each do |s|
+  ProgramSchedule.create(:program_id => s.id, :days_of_week_bin_aggr => 127, :heat_temp => 66.0, :cool_temp => 74.0, :time_of_day => Time.parse('08:00:00'))
+  ProgramSchedule.create(:program_id => s.id, :days_of_week_bin_aggr => 127, :heat_temp => 66.0,:cool_temp => 72.0, :time_of_day => Time.parse('17:00:00'))
+  ProgramSchedule.create(:program_id => s.id, :days_of_week_bin_aggr => 127, :heat_temp => 68.0, :cool_temp => 70.0, :time_of_day => Time.parse('20:00:00'))
+end

@@ -1,79 +1,49 @@
 class MeasurementsController < ApplicationController
   before_action :load_sensor
+  before_action :load_room
 
   def index
-    @measurements = @sensor.measurements
+    if @sensor.present?
+      all = @sensor.measurements
+    else
+      all = @room.measurements
+    end
+
+    @measurements = all
     @count = @measurements.count
   end
 
-  def create
-    @measurement = @sensor.measurements.new(measurement_params)
-
-    if @measurement.save
-      render :show, status: :created
-    else
-      render json: @measurement.errors, status: :unprocessable_entity
-    end
-  end
-
   def show
-    @measurement = @sensor.measurements.find(params[:id])
+    if @sensor.present?
+      measurement = @sensor.measurements
+    else
+      measurement = @room.measurements
+    end
+    @measurement = measurement
   end
 
   def temperature_measurements
-    all = @sensor.measurements.temperatures
+    if @sensor.present?
+      all = @sensor.measurements.temperatures
+    else
+      all = @room.measurements.temperatures
+    end
+
     @measurements = paginate(all)
     @count = all.count
     render :index, status: :ok
   end
 
   def humidity_measurements
-    all = @sensor.measurements.humidities
+    if @sensor.present?
+      all = @sensor.measurements.humidities
+    else
+      all = @room.measurements.humidities
+    end
+
     @measurements = paginate(all)
     @count = all.count
     render :index, status: :ok
-  end
-
-  def create_temperature_measurement
-    p = special_measurement_params('Temperature', :f, :c, :fahrenheit, :celsius)
-
-    # Remove alias parameters
-    f = p.delete(:f)
-    fahrenheit = p.delete(:fahrenheit)
-    c = p.delete(:c)
-    celsius = p.delete(:celsius)
-
-    if p.fetch(:data, nil).nil?
-      f = fahrenheit if f.nil?
-      c = celsius if c.nil?
-
-      if f.nil? and c.nil?
-        return render json: {:error => 'No temperature data found'}, status: :bad_request
-      end
-
-      if f.nil?
-        f = convert_celsius_to_fahrenheit(c)
-      end
-      p[:data] = f
-    end
-
-    @measurement = @sensor.measurements.new(p)
-
-    if @measurement.save
-      render :show, status: :created
-    else
-      render json: @measurement.errors, status: :unprocessable_entity
-    end
-  end
-
-  def create_humidity_measurement
-    @measurement = @sensor.measurements.new(special_measurement_params('Humidity'))
-
-    if @measurement.save
-      render :show, status: :created
-    else
-      render json: @measurement.errors, status: :unprocessable_entity
-    end
   end
 
   private
@@ -109,6 +79,10 @@ class MeasurementsController < ApplicationController
 
   def load_sensor
     @sensor = Sensor.find_by_any_id(params[:sensor_id]).first
+  end
+
+  def load_room
+    @room = Room.find(params[:room_id])
   end
 
   def convert_celsius_to_fahrenheit(c)

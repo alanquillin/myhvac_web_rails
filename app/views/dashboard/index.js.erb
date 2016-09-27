@@ -1,10 +1,11 @@
 setUpdateSystemDetailsTimer();
 
 $('#dashboardError').hide();
+
+$("#systemStatusContainer").html("<%=j render :partial => 'dashboard/system_status', :locals => {dashboard: @dashboard} %>");
 setTempGage(<%= current_temp %>);
-$('#systemDetailsState').text('Unknown');
-$('#systemDetailsProgram').text('<%= current_program %>');
+
 $('#dashboardLastAutoUpdate').text('<%=j DateTime.now.strftime('%x @ %r') %>');
 
-$("#dashboardActiveRooms").html("<%=j render :partial => 'dashboard/rooms', locals: {rooms: @dashboard.rooms.active } %>")
-$("#dashboardInactiveRooms").html("<%=j render :partial => 'dashboard/rooms', locals: {rooms: @dashboard.rooms.inactive, active: false } %>")
+$("#dashboardActiveRooms").html("<%=j render :partial => 'dashboard/rooms', :locals => {rooms: @dashboard.rooms.active} %>");
+$("#dashboardInactiveRooms").html("<%=j render :partial => 'dashboard/rooms', :locals => {rooms: @dashboard.rooms.inactive, :active => false} %>");

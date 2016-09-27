@@ -1,13 +1,1 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">Current Temp / Status</div>
-  <div class="panel-body">
-    <div id="systemDetailsContent">
-      <div id="gauge" class="200x160px"></div>
-      <div>System State: <strong><span id="systemDetailsState">Unknown</span></strong> </div>
-      <div>System Mode: <strong><span id="systemDetailsMode"><%= @dashboard.system_mode.name %></span>
-      <% if @dashboard.system_mode.has_programs %>
-          (<span id="systemDetailsProgram"><%= current_program %></span>)
-      <% end %></strong></div>
-    </div>
-  </div>
-</div>
+<div>System State: <strong><span id="systemDetailsState"><%= dashboard.system_state %></span></strong> </div>
