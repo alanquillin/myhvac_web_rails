@@ -32,9 +32,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-
 gem 'httparty'
 gem 'config'
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and show a debugger console
