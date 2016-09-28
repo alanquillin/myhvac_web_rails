@@ -26,10 +26,6 @@ class Dashboard
     @system_settings
   end
 
-  def mode
-    self.system_settings.mode
-  end
-
   def current_program
     self.system_settings.current_program
   end
@@ -40,6 +36,10 @@ class Dashboard
 
   def current_temp
     system_status['current_temp']
+  end
+
+  def current_system_mode
+    system_status['system_mode']
   end
 
   private

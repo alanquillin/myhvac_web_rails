@@ -6,39 +6,45 @@ module DashboardHelper
     c_temp.to_f.round(2)
   end
 
-  def current_program(system_settings)
-    return 'Unknown' if system_settings.nil? || system_settings.current_program.nil?
+  def current_program(dashboard)
+    mode = dashboard.current_system_mode
+    return 'Unknown' if mode['program'].nil? || mode['program']['name'].nil?
 
-    system_settings.current_program.name
+    mode['program']['name']
   end
 
-  def system_mode(system_settings)
-    return 'Unknown' if system_settings.nil? || system_settings.mode.nil?
+  def has_program(dashboard)
+    mode = dashboard.current_system_mode
 
-    system_settings.mode.name
+    mode['program'].present?
   end
 
-  def cool_temp(system_settings)
-    return 'Unknown' if system_settings.mode == 'Off'
-    return system_settings.cool_temp if system_settings.mode == 'Manual'
+  def system_mode(dashboard)
+    mode = dashboard.current_system_mode
+    return 'Unknown' if mode.nil? || mode['name'].nil?
 
-    return 'Unknown' if system_settings.current_program.nil?
-
-    program = system_settings.current_program
-    return 'Unknown' if program.schedules.empty?
-
-    72.0
+    mode['name']
   end
 
-  def heat_temp(system_settings)
-    return 'Unknown' if system_settings.mode == 'Off'
-    return system_settings.heat_temp if system_settings.mode == 'Manual'
+  def cool_temp(dashboard)
+    get_temp(dashboard, 'cool_temp')
+  end
 
-    return 'Unknown' if system_settings.current_program.nil?
+  def heat_temp(dashboard)
+    get_temp(dashboard, 'heat_temp')
+  end
 
-    program = system_settings.current_program
-    return 'Unknown' if program.schedules.empty?
+  private
 
-    68.0
+  def get_temp(dashboard, temp_key)
+    mode = dashboard.current_system_mode
+
+    return 'Unknown' if mode.nil? || mode['name'].nil? || mode['name'] == 'Off'
+
+    return mode[temp_key] if mode['name'] == 'Manual'
+
+    return 'Unknown' if mode['program'].nil? || mode['program']['active_schedule'].nil?
+
+    mode['program']['active_schedule'][temp_key]
   end
 end

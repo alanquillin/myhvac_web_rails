@@ -1,10 +1,10 @@
-<div>System Mode: <strong><span id="systemDetailsMode"><%= system_mode(system_settings) %></span>
-  <% if system_settings.mode.has_programs %>
-      (<span id="systemDetailsProgram"><%= current_program(system_settings) %></span>)
+<div>System Mode: <strong><span id="systemDetailsMode"><%= system_mode(dashboard) %></span>
+  <% if has_program(dashboard) %>
+      (<span id="systemDetailsProgram"><%= current_program(dashboard) %></span>)
   <% end %><button class="btn btn-xs btn-primary" type="button" onclick="showSystemSettingsEditForm()">Change</button></strong></div>
 <div class="collapse" id="changeSystemModeContainer">
   <div class="well change-system-mode-body">
-    <%=form_for system_settings, url: update_system_settings_path(system_settings), remote: true do |f|%>
+    <%=form_for dashboard.system_settings, url: update_system_settings_path(dashboard.system_settings), remote: true do |f|%>
         <div class="field form-group">
           <%= f.label 'System Mode'%>
           <%= f.collection_select :system_mode_id, SystemMode.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'systemModeSelector'} %>
@@ -21,11 +21,11 @@
     <% end %>
   </div>
 </div>
-<% if system_settings.mode.name != 'Off' %>
+<% if system_mode(dashboard) != 'Off' %>
     <div id="dashboardProgramDetails" class="row">
-      <div class="col-md-3 text-nowrap text-right text-primary" style=""><i class="glyphicon glyphicon-asterisk"></i><%= cool_temp(system_settings) %></div>
+      <div class="col-md-3 text-nowrap text-right text-primary" style=""><i class="glyphicon glyphicon-asterisk"></i><%= cool_temp(dashboard) %></div>
       <div class="col-md-2"></div>
       <div class="col-md-2"></div>
-      <div class="col-md-3 text-nowrap text-left text-danger"><i class="glyphicon glyphicon-fire"></i><%= heat_temp(system_settings) %></div>
+      <div class="col-md-3 text-nowrap text-left text-danger"><i class="glyphicon glyphicon-fire"></i><%= heat_temp(dashboard) %></div>
     </div>
 <% end %>

@@ -16,7 +16,7 @@
     <div class="col-md-4">
       <div class="panel panel-primary">
 
-        <div class="panel-heading">Current Temp / Status</div>
+        <div class="panel-heading">Current Temp / System Status</div>
         <div class="panel-body">
           <div id="systemDetailsContent">
             <div id="gauge" class="200x160px"></div>
@@ -24,7 +24,7 @@
               <%= render 'system_status', :dashboard => @dashboard %>
             </div>
             <div id="systemModeContainer">
-              <%= render 'system_settings', :system_settings => @dashboard.system_settings %>
+              <%= render 'system_settings', :dashboard => @dashboard %>
             </div>
           </div>
         </div>
