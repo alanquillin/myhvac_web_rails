@@ -3,7 +3,7 @@ class MyhvacService
 
   base_uri Settings.myhvac_service.base_uri
 
-  def system_state
+  def system_status
     self.get('/system/state', Settings.myhvac_service.default_fake_state)
   end
 
@@ -12,6 +12,9 @@ class MyhvacService
       return fake
     end
 
-    self.class.get(path)
+    Rails.logger.debug "myhvac_service request: GET http://#{Settings.myhvac_service.base_uri}#{path}"
+    resp = self.class.get(path)
+    Rails.logger.debug "myhvac_service response: #{resp}"
+    resp
   end
 end

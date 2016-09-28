@@ -6,7 +6,7 @@ class Dashboard
 
   def reset
     @rooms = nil
-    @system_state = nil
+    @system_status = nil
     @system_settings = nil
   end
 
@@ -35,13 +35,19 @@ class Dashboard
   end
 
   def system_state
-    if @system_state.nil?
-      @system_state = @myhvac_service_client.system_state
-    end
-    @system_state['state']
+    system_status['state']
   end
 
   def current_temp
-    system_state['current_temp']
+    system_status['current_temp']
+  end
+
+  private
+
+  def system_status
+    if @system_status.nil?
+      @system_status = @myhvac_service_client.system_status
+    end
+    @system_status
   end
 end
