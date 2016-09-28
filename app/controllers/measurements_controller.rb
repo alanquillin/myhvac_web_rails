@@ -82,7 +82,7 @@ class MeasurementsController < ApplicationController
   end
 
   def load_room
-    @room = Room.find(params[:room_id])
+    @room = Room.find_by(id: params[:room_id])
   end
 
   def convert_celsius_to_fahrenheit(c)

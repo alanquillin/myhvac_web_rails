@@ -1,4 +1,5 @@
 myhvac_service:
+  base_uri: localhost:8080
   fake: false
   default_fake_state:
     state: 'Off'
