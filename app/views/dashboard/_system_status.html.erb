@@ -1,1 +1,1 @@
-<div>System State: <strong><span id="systemDetailsState"><%= dashboard.system_state %></span></strong> </div>
+<div>System State: <strong><span id="systemDetailsState"><%= dashboard.system_state %><% if dashboard.system_state != dashboard.expected_program_state %> <span class="text-danger">(Expected: <%=dashboard.expected_program_state%>)</span><% end %></span></strong> </div>

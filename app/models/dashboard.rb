@@ -31,7 +31,11 @@ class Dashboard
   end
 
   def system_state
-    system_status['state']
+    system_status['system_state']
+  end
+
+  def expected_program_state
+    system_status['expected_program_state']
   end
 
   def current_temp

@@ -2,4 +2,29 @@ myhvac_service:
   base_uri: localhost:8080
   fake: false
   default_fake_state:
-    state: 'Off'
+    actual_state: 'Off'
+    expected_satte: 'Off'
+    system_mode:
+      name: 'Off'
+
+      ### Uncomment to fake out Manual Mode
+      #name: 'Manual'
+      #cool_temp: 72.0
+      #heat_temp: 68.0
+
+      ### Uncomment to fake out Auto Mode
+      #name: 'Auto'
+      #program:
+      #  name: 'Test'
+      #    active_schedule:
+      #      cool_temp: 74.0
+      #      days_of_week:
+      #        - 'Sunday'
+      #        - 'Monday'
+      #        - 'Tuesday'
+      #        - 'Wednesday'
+      #        - 'Thursday'
+      #        - 'Friday'
+      #        - 'Saturday'
+      #      heat_temp: 66.0,
+      #      time_of_day: '12:00:00'

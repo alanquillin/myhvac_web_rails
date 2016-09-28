@@ -34,6 +34,21 @@ module DashboardHelper
     get_temp(dashboard, 'heat_temp')
   end
 
+  def get_active_schedule_time(dashboard)
+    get_schedule_time(dashboard, 'active_schedule')
+  end
+
+  def get_next_schedule_time(dashboard)
+    get_schedule_time(dashboard, 'next_schedule')
+  end
+
+  def get_active_schedule_days(dashboard)
+    mode = dashboard.current_system_mode
+    return 'Unknown' if mode['program'].nil? || mode['program']['active_schedule'].nil? || mode['program']['active_schedule']['days_of_week'].empty?
+    logger.debug mode['program']['active_schedule']['days_of_week']
+    mode['program']['active_schedule']['days_of_week'].map {|d| d[0..2] }.join(', ')
+  end
+
   private
 
   def get_temp(dashboard, temp_key)
@@ -46,5 +61,12 @@ module DashboardHelper
     return 'Unknown' if mode['program'].nil? || mode['program']['active_schedule'].nil?
 
     mode['program']['active_schedule'][temp_key]
+  end
+
+  def get_schedule_time(dashboard, schedule_key)
+    mode = dashboard.current_system_mode
+    return 'Unknown' if mode['program'].nil? || mode['program'][schedule_key].nil?
+
+    Time.strptime(mode['program'][schedule_key]['time_of_day'], '%H:%M:%S').strftime('%l:%M %p')
   end
 end
