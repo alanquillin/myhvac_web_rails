@@ -3,6 +3,7 @@ setUpdateSystemDetailsTimer();
 $('#dashboardError').hide();
 
 $("#systemStatusContainer").html("<%=j render :partial => 'dashboard/system_status', :locals => {dashboard: @dashboard} %>");
+$("#systemModeContainer").html("<%=j render :partial => 'dashboard/system_settings', :locals => {dashboard: @dashboard} %>");
 setTempGage(<%= current_temp %>);
 
 $('#dashboardLastAutoUpdate').text('<%=j DateTime.now.strftime('%x @ %r') %>');

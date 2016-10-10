@@ -2,10 +2,11 @@ myhvac_service:
   base_uri: localhost:8080
   fake: false
   default_fake_state:
-    actual_state: 'Off'
-    expected_satte: 'Off'
+    system_state: 'Off'
+    expected_program_state: 'Off'
+    pull_actual_system_mode_from_db: True
     system_mode:
-      name: 'Off'
+      #name: 'Off'
 
       ### Uncomment to fake out Manual Mode
       #name: 'Manual'
@@ -13,18 +14,30 @@ myhvac_service:
       #heat_temp: 68.0
 
       ### Uncomment to fake out Auto Mode
-      #name: 'Auto'
-      #program:
-      #  name: 'Test'
-      #    active_schedule:
-      #      cool_temp: 74.0
-      #      days_of_week:
-      #        - 'Sunday'
-      #        - 'Monday'
-      #        - 'Tuesday'
-      #        - 'Wednesday'
-      #        - 'Thursday'
-      #        - 'Friday'
-      #        - 'Saturday'
-      #      heat_temp: 66.0,
-      #      time_of_day: '12:00:00'
+      name: 'Auto'
+      program:
+          name: 'Winter'
+          active_schedule:
+            cool_temp: 74.0
+            days_of_week:
+              - 'Sunday'
+              - 'Monday'
+              - 'Tuesday'
+              - 'Wednesday'
+              - 'Thursday'
+              - 'Friday'
+              - 'Saturday'
+            heat_temp: 66.0
+            time_of_day: '12:00:00'
+          next_schedule:
+            cool_temp: 72.0
+            days_of_week:
+              - 'Sunday'
+              - 'Monday'
+              - 'Tuesday'
+              - 'Wednesday'
+              - 'Thursday'
+              - 'Friday'
+              - 'Saturday'
+            heat_temp: 68.0
+            time_of_day: '16:00:00'

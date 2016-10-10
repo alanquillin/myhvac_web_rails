@@ -92,18 +92,18 @@ function setAutoUpdateSwitch(){
     });
 }
 
-function showSystemSettingsEditForm(){
-    $('#changeSystemModeContainer').collapse('show');
-    var systemModeSelector = $('#systemModeSelector');
-    var submitBtn = $('#submitEditSystemSettings');
+function showSystemSettingsEditModal(mode, program, cool_val, heat_val){
+    if(mode == '' || mode == 'Unknown')
+        mode = 'Off';
 
-    $('.update-system-setting-field').on('change', function(){
-        submitBtn.prop("disabled",false);
-    });
+    setSystemSystemEditValues(mode, program, cool_val, heat_val);
+    setSystemSettingsEditSectionVisibility(mode);
+    $('#submitEditSystemSettings').prop('disabled', true);
+    $('#setSystemProgramModal').modal('show');
 }
 
-function hideSystemSettingsEditForm() {
-    $('#changeSystemModeContainer').collapse('hide');
+function hideSystemSettingsEditModal() {
+    $('#setSystemProgramModal').modal('hide');
 }
 
 function initRoomMeasurementGrip(room_id){
@@ -121,4 +121,52 @@ function initRoomMeasurementGrip(room_id){
         sortColumn: 'recorded_date',
         sortDirection: 'DESC'
     }, true);
+}
+
+function enableEditSystemSettingSubmit(){
+    $('#submitEditSystemSettings').prop('disabled', false);
+}
+
+function systemSettingsModeChanged(){
+    setSystemSettingsEditSectionVisibility($('#systemModeSelector option:selected').text());
+    enableEditSystemSettingSubmit();
+}
+
+function setSystemSettingsEditSectionVisibility(mode){
+    var prog_selector = $('#editSystemSettingProgramContent');
+    var cool_setting = $('#editSystemSettingCoolTempContent');
+    var heat_setting = $('#editSystemSettingHeatTempContent');
+
+    prog_selector.hide();
+    cool_setting.hide();
+    heat_setting.hide();
+
+    if(mode == 'Auto'){
+        prog_selector.show();
+    }
+
+    if (mode == 'Manual'){
+        cool_setting.show();
+        heat_setting.show();
+    }
+}
+
+function setSystemSystemEditValues(mode, program, cool_val, heat_val){
+    $('#systemModeSelector option').filter(function() {
+        return ($(this).text() == mode);
+    }).prop('selected', true);
+
+    if(program != 'Unknown'){
+        $('#programSelector option').filter(function() {
+            return ($(this).text() == program);
+        }).prop('selected', true);
+    }
+
+    if(cool_val != 'Unknown'){
+        $('#editSystemSettingCoolTemp').val(cool_val)
+    }
+
+    if(heat_val != 'Unknown'){
+        $('#editSystemSettingHeatTemp').val(heat_val)
+    }
 }

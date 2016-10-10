@@ -1,0 +1,26 @@
+<%=form_for dashboard.system_settings, url: update_system_settings_url(dashboard.system_settings), remote: true do |f|%>
+    <div class="field form-group">
+      <%= f.label 'System Mode'%>
+      <%= f.collection_select :system_mode_id, SystemMode.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'systemModeSelector', :onchange => 'systemSettingsModeChanged(this)'} %>
+    </div>
+
+    <div class="field form-group" id="editSystemSettingProgramContent">
+      <%= f.label 'Program'%>
+      <%= f.collection_select :current_program_id, Program.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'programSelector', :onchange => 'enableEditSystemSettingSubmit();'} %>
+    </div>
+
+    <div class="field form-group" id="editSystemSettingCoolTempContent">
+      <%= f.label 'Cool Temp'%>
+      <%= f.text_field :cool_temp, :class => 'form-control', :id => 'editSystemSettingCoolTemp', onkeyup: "enableEditSystemSettingSubmit();"%>
+    </div>
+
+    <div class="field form-group" id="editSystemSettingHeatTempContent">
+      <%= f.label 'Heat Temp'%>
+      <%= f.text_field :heat_temp, :class => 'form-control', :id => 'editSystemSettingHeatTemp', onkeyup: "enableEditSystemSettingSubmit();" %>
+    </div>
+
+    <div class="action form-group">
+      <button class="btn btn-default" type="button" onclick="hideSystemSettingsEditModal()">Cancel</button>
+      <%= f.submit :class => 'btn btn-primary', :id => 'submitEditSystemSettings', :value => 'Update', :disabled => 'disabled' %>
+    </div>
+<% end %>

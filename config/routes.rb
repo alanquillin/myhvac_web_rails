@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'dashboard#index', as: :dashboard
   patch 'dashboard/system_settings/:id', to: 'dashboard#update_system_settings', as: :update_system_settings
+  patch 'dashboard/system_mode', to: 'dashboard#edit_system_mode', as: :edit_system_mode
 
   get 'system/ping'
 

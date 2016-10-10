@@ -9,6 +9,7 @@ class MyhvacService
 
   def get(path, fake=nil)
     if Settings.myhvac_service.fake
+      Rails.logger.debug "myhvac_service: Using FAKE data: #{fake}"
       return fake
     end
 

@@ -53,9 +53,24 @@
   </div>
 </div>
 
+<div class="modal fade" id='setSystemProgramModal' tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Edit System Settings</h4>
+      </div>
+      <div class="modal-body">
+        <div id="setSystemProgramContainer">
+          <%= render 'edit_system_mode', :dashboard => @dashboard %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script language="JavaScript">
   $(document).ready(function(){
-    hideSystemSettingsEditForm();
+    hideSystemSettingsEditModal();
     dashboardPaths = ['<%= root_path %>', '<%=dashboard_path %>'];
     setAutoUpdateSwitch();
     setTempGage(<%= current_temp %>, true);

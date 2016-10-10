@@ -1,7 +1,7 @@
 <div>System Mode: <strong><span id="systemDetailsMode"><%= system_mode(dashboard) %></span>
   <% if has_program(dashboard) %>
       (<span id="systemDetailsProgram"><%= current_program(dashboard) %></span>)
-  <% end %><button class="btn btn-xs btn-primary" type="button" onclick="showSystemSettingsEditForm()">Change</button></strong>
+  <% end %><button class="btn btn-xs btn-primary" type="button" onclick="showSystemSettingsEditModal('<%= system_mode(dashboard) %>', '<%=current_program(dashboard) %>', '<%=cool_temp(dashboard) %>', '<%=heat_temp(dashboard) %>')">Change</button></strong>
   <% if system_mode(dashboard) == 'Auto' %>
       <div>
         <strong>Active schedule: </strong> <br/>
@@ -9,25 +9,6 @@
         <strong>On:</strong> <%=get_active_schedule_days(dashboard) %>
       </div>
   <% end %>
-</div>
-<div class="collapse" id="changeSystemModeContainer">
-  <div class="well change-system-mode-body">
-    <%=form_for dashboard.system_settings, url: update_system_settings_path(dashboard.system_settings), remote: true do |f|%>
-        <div class="field form-group">
-          <%= f.label 'System Mode'%>
-          <%= f.collection_select :system_mode_id, SystemMode.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'systemModeSelector'} %>
-        </div>
-
-        <div class="field form-group">
-          <%= f.label 'Program'%>
-          <%= f.collection_select :current_program_id, Program.all,:id,:name, {}, {:class => 'form-control update-system-setting-field', :id => 'programSelector'} %>
-        </div>
-        <div class="action form-group">
-          <button class="btn btn-default" type="button" onclick="hideSystemSettingsEditForm()">Cancel</button>
-          <%= f.submit :class => 'btn btn-primary', :id => 'submitEditSystemSettings', :value => 'Update', :disabled => 'disabled' %>
-        </div>
-    <% end %>
-  </div>
 </div>
 
 <% if system_mode(dashboard) != 'Off' %>
