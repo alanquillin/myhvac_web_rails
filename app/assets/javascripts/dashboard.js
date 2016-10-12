@@ -170,3 +170,7 @@ function setSystemSystemEditValues(mode, program, cool_val, heat_val){
         $('#editSystemSettingHeatTemp').val(heat_val)
     }
 }
+
+function build_tooltips(){
+    $('[data-toggle="tooltip"]').tooltip()
+}

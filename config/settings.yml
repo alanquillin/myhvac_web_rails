@@ -1,3 +1,6 @@
+stale_measurement_threshold_min: 12
+
+# Settings for the myhvac web api (service)
 myhvac_service:
   base_uri: localhost:8080
   fake: false

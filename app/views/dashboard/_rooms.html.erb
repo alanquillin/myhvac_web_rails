@@ -16,7 +16,15 @@
       <% rooms.each do |room| %>
         <tr>
           <td><%= room.name %></td>
-          <td><%= room.current_temp.nil? ? raw('<i>N/A</i>') : "#{room.current_temp}° F" %></td>
+          <td><%= room.current_temp.nil? ? raw('<i>N/A</i>') : "#{room.current_temp}° F" %>
+              <% if room.show_stale_measurement_alert? %>
+                <span class="text-right">
+                  <i class="glyphicon glyphicon-warning-sign text-warning" data-toggle="tooltip" data-placement="left"
+                     title="The last measurement was take <%=display_time_difference(room.minutes_since_last_meaurement) %> ago.
+                     This room will not be used when determining aggregate temperature."></i>
+                </span>
+              <% end %>
+          </td>
           <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.strftime('%x')}
               <br/>#{room.latest_temp_rec_date.strftime('%r')}") %></td>
           <td><button class="btn btn-default btn-xs" onclick="showRoomMeasurementModal(<%= room.id %>)">

@@ -69,4 +69,22 @@ module DashboardHelper
 
     Time.strptime(mode['program'][schedule_key]['time_of_day'], '%H:%M:%S').strftime('%l:%M %p')
   end
+
+  def display_time_difference(diff)
+    if diff <= 60
+      return "#{diff} mins"
+    end
+
+    hours = (diff / 60).floor
+    min_rem = diff - (hours * 60)
+
+    if diff <= 1440
+      return "#{hours} hours and #{min_rem} mins"
+    end
+
+    days = (hours / 24).floor
+    hours_rem = hours - (days * 24)
+
+    return "#{days} days, #{hours_rem} hours and #{min_rem} mins"
+  end
 end
