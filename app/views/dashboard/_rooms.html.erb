@@ -25,8 +25,8 @@
                 </span>
               <% end %>
           </td>
-          <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.strftime('%x')}
-              <br/>#{room.latest_temp_rec_date.strftime('%r')}") %></td>
+          <td><%= room.latest_temp_rec_date.nil? ? raw('<i>N/A</i>') : raw("#{room.latest_temp_rec_date.localtime.strftime('%x')}
+              <br/>#{room.latest_temp_rec_date.localtime.strftime('%r')}") %></td>
           <td><button class="btn btn-default btn-xs" onclick="showRoomMeasurementModal(<%= room.id %>)">
                 <i class="glyphicon glyphicon-list-alt"></i>
               </button>

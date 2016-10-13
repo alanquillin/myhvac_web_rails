@@ -31,6 +31,6 @@ class Room < ApplicationRecord
 
     return nil if rec_dt.nil?
 
-    ((Time.now.utc - rec_dt) / 60).floor
+    ((Time.now.in_time_zone(rec_dt.zone) - rec_dt) / 60).floor
   end
 end

@@ -114,7 +114,9 @@ function initRoomMeasurementGrip(room_id){
         dataModel: [
             { name: 'Temp', index: 'data', sortable: false},
             { name: 'Sensor Id', index: 'sensor_id'},
-            { name: 'Recorded Date', index: 'recorded_date'}
+            { name: 'Recorded Date', index: 'recorded_date', formatter: function(val, item){
+                return new Date(val).toLocaleString();
+            }}
         ],
         title: '',
         dataItemIndex: 'measurements',
